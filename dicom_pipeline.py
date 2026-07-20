@@ -15,7 +15,7 @@ except ImportError:
     sys.exit("Missing dependency: run `pip install nibabel --break-system-packages`")
 
 # Hardcoded Paths for Testing
-INPUT_DIR = r"C:\Users\malhotsm\UC_GBM\DICOM Files\02008471"
+INPUT_DIR = r"C:\Users\malhotsm\UC_GBM\DICOM Files_2"
 OUTPUT_DIR = r"C:\Users\malhotsm\Dicom_extraction_pipeline\Test_Output"
 DCM2NIIX_PATH = r"C:\Users\malhotsm\Downloads\dcm2niix_win\dcm2niix.exe"
 
@@ -158,7 +158,7 @@ class PatientProcessor:
             candidates.sort(key=lambda x: x["slices"], reverse=True)
             best_scan = candidates[0]
             
-            final_filename = f"{patient_id}_{best_scan['date']}_{category}.nii.gz"
+            final_filename = f"{patient_id}_{category}.nii.gz"
             final_path = patient_out_dir / final_filename
             
             shutil.move(str(best_scan["nifti"]), str(final_path))
