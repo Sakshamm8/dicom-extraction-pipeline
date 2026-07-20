@@ -20,7 +20,7 @@ This system was built utilizing strict Object-Oriented Programming (OOP) paradig
 *   [dcm2niix](https://github.com/rordenlab/dcm2niix) (executable required for backend binary conversion)
 
 ## Execution
-Run the pipeline via the command line interface, passing the paths to the backend executable, the raw data, and the output destination:
+Paths to the local environment, dataset, and `dcm2niix` executable are configured as variables at the top of the script. To run the extraction pipeline, simply execute:
 
 ```bash
-python dicom_pipeline.py --dcm2niix "C:\path\to\dcm2niix.exe" --dicom-root "C:\path\to\DICOM_Files" --out-dir "C:\path\to\Output"
+python dicom_pipeline.py
