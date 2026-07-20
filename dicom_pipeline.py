@@ -15,9 +15,9 @@ except ImportError:
     sys.exit("Missing dependency: run `pip install nibabel --break-system-packages`")
 
 # Hardcoded Paths for Testing
-INPUT_DIR = r"C:\Users\malhotsm\UC_GBM\DICOM Files_2"
-OUTPUT_DIR = r"C:\Users\malhotsm\Dicom_extraction_pipeline\Test_Output"
-DCM2NIIX_PATH = r"C:\Users\malhotsm\Downloads\dcm2niix_win\dcm2niix.exe"
+INPUT_DIR = r"C:\summer_26\programming_lang\dicom\Dicom Files_2"
+OUTPUT_DIR = r"C:\summer_26\programming_lang\dicom\dicom-extraction-pipeline\test_output"
+DCM2NIIX_PATH = r"C:\summer_26\programming_lang\dicom\dcm2niix_win\dcm2niix.exe"
 
 class SeriesClassifier:
     """Handles the classification of MRI series based on DICOM metadata."""
