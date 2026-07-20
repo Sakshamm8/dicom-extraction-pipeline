@@ -1,13 +1,15 @@
-# Ignore output directories and temporary files
-temp_*/
-*.nii.gz
-*.dcm
+# Ignore Output and Data Folders
+Test_Output/
+output_data/
+input_data/
 *.csv
 
-# Ignore Python cache
+# Ignore dcm2niix executable if you dropped it in the folder
+*.exe
+dcm2niix_win/
+
+# Ignore Python specific files
 __pycache__/
 *.pyc
-
-# Ignore virtual environments
 venv/
-env/
+.env

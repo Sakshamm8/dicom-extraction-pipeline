@@ -14,6 +14,10 @@ try:
 except ImportError:
     sys.exit("Missing dependency: run `pip install nibabel --break-system-packages`")
 
+# Hardcoded Paths for Testing
+INPUT_DIR = r"C:\Users\malhotsm\UC_GBM\DICOM Files\02008471"
+OUTPUT_DIR = r"C:\Users\malhotsm\Dicom_extraction_pipeline\Test_Output"
+DCM2NIIX_PATH = r"C:\Users\malhotsm\Downloads\dcm2niix_win\dcm2niix.exe"
 
 class SeriesClassifier:
     """Handles the classification of MRI series based on DICOM metadata."""
@@ -181,8 +185,16 @@ class PipelineOrchestrator:
     def run(self):
         processor = PatientProcessor(self.dcm2niix_path, self.categories, self.logger)
         
-        for in_dir in sorted([p for p in self.in_root.iterdir() if p.is_dir()]):
-            processor.process(in_dir, self.out_root)
+        # Check if the input is a direct patient folder or a root directory
+        subdirs = [p for p in self.in_root.iterdir() if p.is_dir()]
+        
+        if not subdirs:
+            # It's likely a single patient folder (e.g., .../02008471)
+            processor.process(self.in_root, self.out_root)
+        else:
+            # It's a root directory containing multiple patient folders
+            for in_dir in sorted(subdirs):
+                processor.process(in_dir, self.out_root)
             
         self.logger.save()
         print("\n" + "="*40)
@@ -191,13 +203,14 @@ class PipelineOrchestrator:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Object-Oriented DICOM to NIfTI Extraction Pipeline")
-    parser.add_argument("--dcm2niix", required=True, help="Path to dcm2niix.exe")
-    parser.add_argument("--dicom-root", required=True, help="Root folder containing patient DICOM folders")
-    parser.add_argument("--out-dir", required=True, help="Clean output directory")
-    parser.add_argument("--categories", nargs="+", default=["t1c", "t2f"], help="Categories to keep")
+    # Bypassing argparse to use hardcoded variables
+    print("Starting pipeline using hardcoded test variables...")
     
-    args = parser.parse_args()
+    pipeline = PipelineOrchestrator(
+        in_root=INPUT_DIR, 
+        out_root=OUTPUT_DIR, 
+        dcm2niix_path=DCM2NIIX_PATH, 
+        categories=["t1c", "t2f"]  
+    )
     
-    pipeline = PipelineOrchestrator(args.dicom_root, args.out_dir, args.dcm2niix, args.categories)
     pipeline.run()
