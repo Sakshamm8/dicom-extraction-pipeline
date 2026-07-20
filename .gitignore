@@ -1,0 +1,13 @@
+# Ignore output directories and temporary files
+temp_*/
+*.nii.gz
+*.dcm
+*.csv
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+venv/
+env/
